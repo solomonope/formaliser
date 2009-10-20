@@ -1,0 +1,27 @@
+#summary An introduction to Formaliser
+
+= Introduction =
+
+Formaliser aims to do for HTML forms what ORMs did for DB schemas by automating the transformation of classes into HTML forms and request parameters back into classes.
+
+= An example =
+
+The two most important classes are FormWriter and FormReader.
+
+FormWriter produces a list of FormElements, which are simple data classes used by a templating engine to generate the appropriate HTML.
+
+{{{
+FormWriter writer = new FormWriter().forJpa();
+List<FormElement> form = writer.toForm("user", myUserInstance);
+}}}
+
+JPA annotations can be used to specify which fields are required and other constraints.
+
+FormReader takes a HttpServletRequest's parameter map and turns it into a given class.
+
+{{{
+FormReader reader = new FormReader();
+MyUser myUserInstance = reader.read("user", MyUser.class, parameterMap, 0);
+}}}
+
+The entity instance can then be validated (by a Bean Validation implementation, for example), handed off to a controller, etc.
