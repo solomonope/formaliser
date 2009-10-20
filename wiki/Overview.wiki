@@ -1,4 +1,5 @@
 #summary An introduction to Formaliser
+#labels Featured
 
 = Introduction =
 
