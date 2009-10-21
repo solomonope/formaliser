@@ -17,7 +17,9 @@ public class FieldName {
 	 * @return The camel cased version of {@link #toString()}
 	 */
 	public String toId() {
-		return capitalize(toString(), new char[] {'.'}).replaceAll("\\.", "");
+		String fullName = toString();
+		
+        return fullName.substring(0, 1) + capitalize(fullName, new char[] {'.'}).replaceAll("\\.", "").substring(1);
 	}
 	
 	public Object toId(Long id) {
@@ -33,9 +35,10 @@ public class FieldName {
 
 	/**
 	 * 
-	 * @return the part of the enum's name after the _
+	 * @return the part of the field's name after the last dot. 
 	 */
 	public String toShortName() {
+	    if (!fieldName.contains(".")) return fieldName;
 		return substringAfterLast(toString(), ".");
 	}
 
@@ -48,13 +51,15 @@ public class FieldName {
 	}
 
 	/**
-	 * 
-	 * @return The humanized full enum name
+	 * @return The humanized full name
 	 */
 	public String toMessage() {
 		return (toRoot() + " " + toLabel()).toLowerCase();
 	}
 	
+	/**
+	 * @return Everything before the first dot.
+	 */
 	public String toRoot() {
 		return StringUtils.substringBefore(fieldName, ".");
 	}
