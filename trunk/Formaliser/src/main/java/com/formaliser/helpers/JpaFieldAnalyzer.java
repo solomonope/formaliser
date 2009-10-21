@@ -107,11 +107,10 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
     public List<ExtendedField> handleIdOnly(Field entityField, Object entity) {
         try {
             entityField.setAccessible(true);
-            Class<?> entityFieldType = entityField.getType();
-            if (basicConvertibleClasses.isCollection(entityFieldType)) {
-                return extractIds(entityField, entity);
+            if (basicConvertibleClasses.isCollection((Class<?>) entityField.getType())) {
+                return extractIdsFromCollection(entityField, entity);
             }
-            return singletonList(new ExtendedField(getId(entityFieldType), entityField.get(entity), entityField.getName()));
+            return extractIdFromSingleEntity(entityField, entity);
         } catch (RuntimeException e) {
             throw e;
         } catch (Exception e) {
@@ -119,7 +118,11 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
         }
     }
 
-    private List<ExtendedField> extractIds(Field idOnlyEntitiesField, Object entity) throws IllegalAccessException {
+    private List<ExtendedField> extractIdFromSingleEntity(Field entityField, Object entity) throws IllegalAccessException {
+        return singletonList(new ExtendedField(getId(entityField.getType()), entityField.get(entity), entityField.getName()));
+    }
+
+    private List<ExtendedField> extractIdsFromCollection(Field idOnlyEntitiesField, Object entity) throws IllegalAccessException {
         Collection<?> idOnlyEntities = (Collection<?>) idOnlyEntitiesField.get(entity);
         if (idOnlyEntities == null) idOnlyEntities = Collections.emptyList();
         

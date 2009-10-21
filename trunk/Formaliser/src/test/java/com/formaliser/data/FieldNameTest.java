@@ -17,6 +17,11 @@ public class FieldNameTest {
 	public void toShortName_removes_class_name() {
 		assertEquals("name", new FieldName("Venue.name").toShortName());
 	}
+    
+    @Test
+    public void toShortName_returns_full_name_if_class_name_not_present() {
+        assertEquals("name", new FieldName("name").toShortName());
+    }
 	
 	@Test
 	public void toLabel_pretty_prints_the_field() {
