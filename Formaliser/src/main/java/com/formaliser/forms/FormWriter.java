@@ -14,7 +14,6 @@ import com.formaliser.data.ChoiceElement;
 import com.formaliser.data.FieldName;
 import com.formaliser.data.FormElement;
 import com.formaliser.data.SimpleFormElement;
-import com.formaliser.helpers.BasicConvertibleClasses;
 import com.formaliser.helpers.BasicTypesConverter;
 import com.formaliser.helpers.BooleanConverter;
 import com.formaliser.helpers.JpaFieldAnalyzer;
@@ -24,7 +23,6 @@ public class FormWriter {
     
     private final BooleanConverter booleanConverter = new BooleanConverter();
     private final BasicTypesConverter typesConverter;
-    private final BasicConvertibleClasses basicConvertibleClasses = new BasicConvertibleClasses();
     
     private final FieldAnalyzer fieldAnalyzer;
 

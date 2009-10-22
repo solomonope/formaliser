@@ -34,8 +34,6 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
     
     private ManualBeanFieldAnalyzer manualAnalyzer = new ManualBeanFieldAnalyzer();
     
-    private final Set<Class<?>> idOnly = new HashSet<Class<?>>();
-    
     private final static BasicConvertibleClasses basicConvertibleClasses = new BasicConvertibleClasses();
     private final static Set<Class<? extends Annotation>> relationshipAnnotations = new HashSet<Class<? extends Annotation>>();
     
@@ -43,20 +41,6 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
         relationshipAnnotations.add(OneToMany.class);
         relationshipAnnotations.add(ManyToMany.class);
         relationshipAnnotations.add(ManyToOne.class);
-    }
-    
-    public JpaFieldAnalyzer includeIdOnlyFor(Class<?>... relatedEntities) {
-        return new JpaFieldAnalyzer(relatedEntities);
-    }
-    
-    public JpaFieldAnalyzer() {
-        this(new Class<?>[0]);
-    }
-    
-    private JpaFieldAnalyzer(Class<?>[] idOnly) {
-        for (Class<?> aRelationship : idOnly) {
-            this.idOnly.add(aRelationship);
-        }
     }
 
     @Override
@@ -83,8 +67,7 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
     @Override
     public boolean isRequired(Field field, Object entity) {
         if (entity != null && isId(field)) return true;
-        return field.isAnnotationPresent(Column.class) && !field.getAnnotation(Column.class).nullable()
-                || field.isAnnotationPresent(Basic.class) && !field.getAnnotation(Basic.class).optional();
+        return isNotNullable(field) || isNotOptional(field);
     }
 
     @Override
@@ -150,6 +133,14 @@ public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships 
 
     private boolean isMapped(Class<?> potentialClass) {
         return potentialClass.isAnnotationPresent(MappedSuperclass.class) || potentialClass.isAnnotationPresent(Entity.class);
+    }
+
+    private boolean isNotOptional(Field field) {
+        return field.isAnnotationPresent(Basic.class) && !field.getAnnotation(Basic.class).optional();
+    }
+
+    private boolean isNotNullable(Field field) {
+        return field.isAnnotationPresent(Column.class) && !field.getAnnotation(Column.class).nullable();
     }
 
     private boolean hasRelationshipAnnotation(Field field) {
