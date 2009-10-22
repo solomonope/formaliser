@@ -3,7 +3,13 @@ package com.formaliser.helpers.html;
 import static com.formaliser.testutils.TestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.util.Arrays;
+
 import org.junit.Test;
+
+import com.formaliser.data.ChoiceElement;
+import com.formaliser.data.FieldName;
+import com.formaliser.helpers.StandardInputTypes;
 
 public class HtmlWriterTest {
     private HtmlWriter writer = new HtmlWriter();
@@ -41,5 +47,57 @@ public class HtmlWriterTest {
         String html = writer.write(reqBoolChoice("chk", true));
         
         assertThat(html).isEqualTo("<label for=\"chk\">chk*</label> <input type=\"checkbox\" id=\"chk\" name=\"chk\" value=\"true\" checked=\"checked\"/>");
+    }
+    
+    @Test
+    public void writes_hidden_field_with_value() {
+        String html = writer.write(req(StandardInputTypes.HIDDEN, "h.i", "i.h"));
+        
+        assertThat(html).isEqualTo("<input type=\"hidden\" id=\"hI\" name=\"h.i\" value=\"i.h\"/>");
+    }
+    
+    @Test
+    public void writes_multiple_choice_as_select() {
+        String html = writer.write(new ChoiceElement(new FieldName("choice.name"), "", new String[] {"c1", "c2", "c3"}, true));
+        
+        assertThat(html).isEqualTo("<label for=\"choiceName\">name*</label> <select id=\"choiceName\" name=\"choice.name\"><option>c1</option><option>c2</option><option>c3</option></select>");
+    }
+    
+    @Test
+    public void writes_multiple_choice_with_selected_value() {
+        String html = writer.write(new ChoiceElement(new FieldName("choice.name"), "c2", new String[] {"c1", "c2", "c3"}, true));
+        
+        assertThat(html).isEqualTo("<label for=\"choiceName\">name*</label> <select id=\"choiceName\" name=\"choice.name\"><option>c1</option><option selected=\"selected\">c2</option><option>c3</option></select>");
+    }
+    
+    @Test
+    public void writes_several_elements_at_once() {
+        String html = writer.write(Arrays.asList(reqText("f1"), reqText("f2", "2")));
+        
+        assertThat(html).isEqualTo(writer.write(reqText("f1")) + "\n" + writer.write(reqText("f2", "2")));
+    }
+    
+    @Test
+    public void req_token_can_be_customised() {
+        String expectedForm = writer.write(reqText("reqField")).replace("*", " -*-");
+        
+        String html = writer.setRequiredToken(" -*-").write(reqText("reqField"));
+        
+        assertThat(html).isEqualTo(expectedForm);
+    }
+    
+    @Test
+    public void input_text_template_can_be_customised() {
+        String html = writer.setInputTextTemplate("<${name} input>").write(reqText("weird"));
+        assertThat(html).endsWith("<weird input>");
+    }
+    
+    @Test
+    public void can_decorate_full_line() {
+        String expected = "startExtra" + writer.write(reqText("decorated")) + "endExtra";
+        
+        String html = writer.setResultDecorationTemplate("startExtra${formElement}endExtra").write(reqText("decorated"));
+        
+        assertThat(html).isEqualTo(expected);
     }
 }
