@@ -1,4 +1,4 @@
-package com.formaliser.toentitytests;
+package formaliser.toentitytests;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.reflect.core.Reflection.field;
@@ -12,16 +12,17 @@ import java.util.Locale;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.formaliser.forms.FormReader;
-import com.formaliser.testutils.TestClasses.BasicTypesEntity;
-import com.formaliser.testutils.TestClasses.CompositeGraphRoot;
-import com.formaliser.testutils.TestClasses.GraphRoot;
-import com.formaliser.testutils.TestClasses.NullableEntity;
-import com.formaliser.testutils.TestClasses.OptionalEntity;
-import com.formaliser.testutils.TestClasses.WithPrimitives;
-import com.formaliser.testutils.TestClasses.WithPrivateFields;
-import com.formaliser.testutils.TestClasses.WithPrivateNoArgsConstructor;
-import com.formaliser.testutils.TestClasses.WithRelationships;
+
+import formaliser.forms.FormReader;
+import formaliser.testutils.TestClasses.BasicTypesEntity;
+import formaliser.testutils.TestClasses.CompositeGraphRoot;
+import formaliser.testutils.TestClasses.GraphRoot;
+import formaliser.testutils.TestClasses.NullableEntity;
+import formaliser.testutils.TestClasses.OptionalEntity;
+import formaliser.testutils.TestClasses.WithPrimitives;
+import formaliser.testutils.TestClasses.WithPrivateFields;
+import formaliser.testutils.TestClasses.WithPrivateNoArgsConstructor;
+import formaliser.testutils.TestClasses.WithRelationships;
 
 public class RequestParametersConversionTest {
 

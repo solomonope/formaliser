@@ -1,9 +1,11 @@
-package com.formaliser.data;
+package formaliser.data;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import formaliser.data.FieldName;
 
 public class FieldNameTest {
 

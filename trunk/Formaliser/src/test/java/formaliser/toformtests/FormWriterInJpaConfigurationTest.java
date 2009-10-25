@@ -1,7 +1,7 @@
-package com.formaliser.toformtests;
+package formaliser.toformtests;
 
-import static com.formaliser.helpers.StandardInputTypes.*;
-import static com.formaliser.testutils.TestUtils.*;
+import static formaliser.helpers.StandardInputTypes.*;
+import static formaliser.testutils.TestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.HashSet;
@@ -9,17 +9,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.formaliser.data.FormElement;
-import com.formaliser.forms.FormWriter;
-import com.formaliser.testutils.TestClasses;
-import com.formaliser.testutils.TestClasses.AnEmbeddable;
-import com.formaliser.testutils.TestClasses.NonInsertableEntity;
-import com.formaliser.testutils.TestClasses.NullableEntity;
-import com.formaliser.testutils.TestClasses.OptionalEntity;
-import com.formaliser.testutils.TestClasses.WithEmbeddable;
-import com.formaliser.testutils.TestClasses.WithGeneratedId;
-import com.formaliser.testutils.TestClasses.WithRelationships;
-import com.formaliser.testutils.TestClasses.WithTwoLevelsOfRelationships;
+
+import formaliser.data.FormElement;
+import formaliser.forms.FormWriter;
+import formaliser.testutils.TestClasses;
+import formaliser.testutils.TestClasses.AnEmbeddable;
+import formaliser.testutils.TestClasses.NonInsertableEntity;
+import formaliser.testutils.TestClasses.NullableEntity;
+import formaliser.testutils.TestClasses.OptionalEntity;
+import formaliser.testutils.TestClasses.WithEmbeddable;
+import formaliser.testutils.TestClasses.WithGeneratedId;
+import formaliser.testutils.TestClasses.WithRelationships;
+import formaliser.testutils.TestClasses.WithTwoLevelsOfRelationships;
 
 public class FormWriterInJpaConfigurationTest {
 
