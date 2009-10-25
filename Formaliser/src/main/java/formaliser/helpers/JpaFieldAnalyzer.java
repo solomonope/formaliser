@@ -1,4 +1,4 @@
-package com.formaliser.helpers;
+package formaliser.helpers;
 
 import static java.util.Collections.singletonList;
 
@@ -23,11 +23,12 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import com.formaliser.configuration.FieldAnalyzer;
-import com.formaliser.configuration.HandlesJpaRelationships;
-import com.formaliser.configuration.InclusionMode;
-import com.formaliser.data.InputType;
-import com.formaliser.forms.FormWriter.ExtendedField;
+
+import formaliser.configuration.FieldAnalyzer;
+import formaliser.configuration.HandlesJpaRelationships;
+import formaliser.configuration.InclusionMode;
+import formaliser.data.InputType;
+import formaliser.forms.FormWriter.ExtendedField;
 
 
 public class JpaFieldAnalyzer implements FieldAnalyzer, HandlesJpaRelationships {
