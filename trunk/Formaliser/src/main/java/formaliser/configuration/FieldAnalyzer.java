@@ -1,9 +1,9 @@
-package com.formaliser.configuration;
+package formaliser.configuration;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import com.formaliser.data.InputType;
+import formaliser.data.InputType;
 
 public interface FieldAnalyzer {
 

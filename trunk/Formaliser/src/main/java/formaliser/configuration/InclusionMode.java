@@ -1,4 +1,4 @@
-package com.formaliser.configuration;
+package formaliser.configuration;
 
 public enum InclusionMode {
     NONE, ID_ONLY, FULL;
