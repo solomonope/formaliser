@@ -1,4 +1,4 @@
-package com.formaliser.forms;
+package formaliser.forms;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -13,19 +13,17 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.formaliser.helpers.BasicConvertibleClasses;
-import com.formaliser.helpers.BasicTypesConverter;
-import com.formaliser.helpers.BooleanConverter;
+import formaliser.helpers.BasicConvertibleClasses;
+import formaliser.helpers.BasicTypesConverter;
 
 /**
  * All reading methods can return null, leaving validation to another class.
  */
 public class FormReader {
-    private static final BooleanConverter BOOLEAN_CONVERTER = new BooleanConverter();
     private final BasicTypesConverter converter = new BasicTypesConverter();
 
     public <T> T readParameter(String parameterName, Class<T> targetClass, Map<String, String[]> requestParameters, int index) {
-        if (!requestParameters.containsKey(parameterName) && BOOLEAN_CONVERTER.canConvert(targetClass)) return (T) BOOLEAN_CONVERTER.convert((String) null) ;
+        if (!requestParameters.containsKey(parameterName) && converter.isBoolean(targetClass)) return (T) converter.convert("", Boolean.class) ;
         if (!requestParameters.containsKey(parameterName)) return null;
         return (T) converter.convert(requestParameters.get(parameterName)[index], targetClass);
     }
