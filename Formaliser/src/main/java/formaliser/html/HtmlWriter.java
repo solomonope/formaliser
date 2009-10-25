@@ -1,4 +1,4 @@
-package com.formaliser.helpers.html;
+package formaliser.html;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
 
@@ -8,18 +8,13 @@ import java.util.List;
 import org.apache.commons.lang.text.StrBuilder;
 import org.apache.commons.lang.text.StrSubstitutor;
 
-import com.formaliser.data.ChoiceElement;
-import com.formaliser.data.FormElement;
-import com.formaliser.helpers.StandardInputTypes;
+import formaliser.data.ChoiceElement;
+import formaliser.data.FormElement;
+import formaliser.helpers.StandardInputTypes;
 
 public class HtmlWriter {
-
-    private String labelTemplate = "<label for=\"${id}\">${label}${required}</label> ";
-    private String selectTemplate = "<select id=\"${id}\" name=\"${name}\">${options}</select>";
-    private String requiredToken = "*";
-    private String inputTextTemplate = "<input type=\"${type}\" id=\"${id}\" name=\"${name}\" value=\"${value}\"${extras}/>";
-    private String optionTemplate = "<option${selectedOption}>${value}</option>";
-    private String resultDecorationTemplate;
+    
+    private HtmlTemplates htmlTemplates = new PlainHtmlTemplates(null);
 
     public String write(List<? extends FormElement> formElements) {
         StrBuilder formBuilder = new StrBuilder();
@@ -39,8 +34,8 @@ public class HtmlWriter {
         templateValues.put("label", formElement.getName().toShortName());
         templateValues.put("type", "text");
         templateValues.put("extras", EMPTY);
-        templateValues.put("required", formElement.isRequired() ? getRequiredToken() : EMPTY);
-        String labelText = strSubstitutor.replace(getLabeltemplate());
+        templateValues.put("required", formElement.isRequired() ? htmlTemplates.getRequiredToken() : EMPTY);
+        String labelText = strSubstitutor.replace(htmlTemplates.getLabelTemplate());
         
         if (formElement.getType() == StandardInputTypes.CHECKBOX) {
             ChoiceElement checkbox = (ChoiceElement) formElement;
@@ -54,7 +49,7 @@ public class HtmlWriter {
             labelText = EMPTY;
             templateValues.put("type", "hidden");
         }
-        String inputText = strSubstitutor.replace(getInputTextTemplate());
+        String inputText = strSubstitutor.replace(htmlTemplates.getTextInputTemplate());
         
         if (formElement.getType() == StandardInputTypes.CHOICE) {
             StringBuilder options = new StringBuilder();
@@ -62,56 +57,22 @@ public class HtmlWriter {
             for (String choice : choiceElement.choices) {
                 templateValues.put("selectedOption", choiceElement.isSelected(choice) ? " selected=\"selected\"" : EMPTY);
                 templateValues.put("value", choice);
-                options.append(strSubstitutor.replace(getOptionTemplate()));
+                options.append(strSubstitutor.replace(htmlTemplates.getOptionTemplate()));
             }
             templateValues.put("options", options.toString());
-            inputText = strSubstitutor.replace(getSelecttemplate());
+            inputText = strSubstitutor.replace(htmlTemplates.getSelectTemplate());
         }
         
         String formElementHtml = labelText + inputText;
-        if (resultDecorationTemplate != null) {
+        if (htmlTemplates.getLineDecorator() != null) {
             templateValues.put("formElement", formElementHtml);
-            formElementHtml = strSubstitutor.replace(resultDecorationTemplate);
+            formElementHtml = strSubstitutor.replace(htmlTemplates.getLineDecorator());
         }
         return formElementHtml;
     }
-
-    private String getRequiredToken() {
-        return requiredToken;
-    }
     
-    private String getInputTextTemplate() {
-        return inputTextTemplate;
-    }
-
-    private String getSelecttemplate() {
-        return selectTemplate;
-    }
-
-    private String getLabeltemplate() {
-        return labelTemplate;
-    }
-
-    private String getOptionTemplate() {
-        return optionTemplate;
-    }
-
-    public HtmlWriter setRequiredToken(String customRequiredToken) {
-        this.requiredToken  = customRequiredToken;
-        return this;
-    }
-
-    public HtmlWriter setInputTextTemplate(String template) {
-        this.inputTextTemplate  = template;
-        return this;
-    }
-
-    /**
-     * Use ${formElement} to represent the output of the full conversion.
-     * @param template null by default.
-     */
-    public HtmlWriter setResultDecorationTemplate(String template) {
-        this.resultDecorationTemplate = template;
+    public HtmlWriter setHtmlTemplates(HtmlTemplates htmlTemplates) {
+        this.htmlTemplates = htmlTemplates;
         return this;
     }
 
