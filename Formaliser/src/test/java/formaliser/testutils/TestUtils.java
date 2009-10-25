@@ -1,9 +1,10 @@
-package com.formaliser.testutils;
+package formaliser.testutils;
 
-import com.formaliser.data.ChoiceElement;
-import com.formaliser.data.FieldName;
-import com.formaliser.data.SimpleFormElement;
-import com.formaliser.helpers.StandardInputTypes;
+
+import formaliser.data.ChoiceElement;
+import formaliser.data.FieldName;
+import formaliser.data.SimpleFormElement;
+import formaliser.helpers.StandardInputTypes;
 
 public class TestUtils {
 

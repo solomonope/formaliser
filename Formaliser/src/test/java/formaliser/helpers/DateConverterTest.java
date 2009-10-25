@@ -1,4 +1,4 @@
-package com.formaliser.helpers;
+package formaliser.helpers;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
+
+import formaliser.helpers.DateConverter;
 
 public class DateConverterTest {
 

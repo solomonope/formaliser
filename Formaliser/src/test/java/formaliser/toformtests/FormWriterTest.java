@@ -1,6 +1,6 @@
-package com.formaliser.toformtests;
+package formaliser.toformtests;
 
-import static com.formaliser.testutils.TestUtils.*;
+import static formaliser.testutils.TestUtils.*;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -10,22 +10,23 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.formaliser.data.ChoiceElement;
-import com.formaliser.data.FieldName;
-import com.formaliser.data.FormElement;
-import com.formaliser.data.SimpleFormElement;
-import com.formaliser.forms.FormWriter;
-import com.formaliser.helpers.DateConverter;
-import com.formaliser.helpers.ManualBeanFieldAnalyzer;
-import com.formaliser.testutils.TestClasses.BasicTypesEntity;
-import com.formaliser.testutils.TestClasses.GraphElement;
-import com.formaliser.testutils.TestClasses.GraphRoot;
-import com.formaliser.testutils.TestClasses.NullableEntity;
-import com.formaliser.testutils.TestClasses.SimpleGraph;
-import com.formaliser.testutils.TestClasses.WithEnum;
-import com.formaliser.testutils.TestClasses.WithRelationships;
-import com.formaliser.testutils.TestClasses.WithTransient;
-import com.formaliser.testutils.TestClasses.WithEnum.AnEnum;
+
+import formaliser.data.ChoiceElement;
+import formaliser.data.FieldName;
+import formaliser.data.FormElement;
+import formaliser.data.SimpleFormElement;
+import formaliser.forms.FormWriter;
+import formaliser.helpers.DateConverter;
+import formaliser.helpers.ManualBeanFieldAnalyzer;
+import formaliser.testutils.TestClasses.BasicTypesEntity;
+import formaliser.testutils.TestClasses.GraphElement;
+import formaliser.testutils.TestClasses.GraphRoot;
+import formaliser.testutils.TestClasses.NullableEntity;
+import formaliser.testutils.TestClasses.SimpleGraph;
+import formaliser.testutils.TestClasses.WithEnum;
+import formaliser.testutils.TestClasses.WithRelationships;
+import formaliser.testutils.TestClasses.WithTransient;
+import formaliser.testutils.TestClasses.WithEnum.AnEnum;
 
 public class FormWriterTest {
     

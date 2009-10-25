@@ -1,15 +1,17 @@
-package com.formaliser.helpers.html;
+package formaliser.helpers.html;
 
-import static com.formaliser.testutils.TestUtils.*;
+import static formaliser.testutils.TestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.formaliser.data.ChoiceElement;
-import com.formaliser.data.FieldName;
-import com.formaliser.helpers.StandardInputTypes;
+import formaliser.data.ChoiceElement;
+import formaliser.data.FieldName;
+import formaliser.helpers.StandardInputTypes;
+import formaliser.html.HtmlWriter;
+import formaliser.html.PlainHtmlTemplates;
 
 public class HtmlWriterTest {
     private HtmlWriter writer = new HtmlWriter();
@@ -80,23 +82,37 @@ public class HtmlWriterTest {
     @Test
     public void req_token_can_be_customised() {
         String expectedForm = writer.write(reqText("reqField")).replace("*", " -*-");
-        
-        String html = writer.setRequiredToken(" -*-").write(reqText("reqField"));
+        writer.setHtmlTemplates(new PlainHtmlTemplates() {
+            @Override
+            public String getRequiredToken() {
+                return " -*-";
+            }
+        });
+        String html = writer.write(reqText("reqField"));
         
         assertThat(html).isEqualTo(expectedForm);
     }
     
     @Test
     public void input_text_template_can_be_customised() {
-        String html = writer.setInputTextTemplate("<${name} input>").write(reqText("weird"));
+        PlainHtmlTemplates customHtmlTemplates = new PlainHtmlTemplates() {
+            @Override
+            public String getTextInputTemplate() {
+                return "<${name} input>";
+            }
+        };
+
+        String html = writer.setHtmlTemplates(customHtmlTemplates).write(reqText("weird"));
         assertThat(html).endsWith("<weird input>");
     }
     
     @Test
     public void can_decorate_full_line() {
+        PlainHtmlTemplates customHtmlTemplates = new PlainHtmlTemplates("startExtra${formElement}endExtra");
+
         String expected = "startExtra" + writer.write(reqText("decorated")) + "endExtra";
         
-        String html = writer.setResultDecorationTemplate("startExtra${formElement}endExtra").write(reqText("decorated"));
+        String html = writer.setHtmlTemplates(customHtmlTemplates).write(reqText("decorated"));
         
         assertThat(html).isEqualTo(expected);
     }
