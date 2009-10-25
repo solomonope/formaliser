@@ -1,4 +1,4 @@
-package com.formaliser.helpers;
+package formaliser.helpers;
 
 import static java.lang.Boolean.FALSE;
 

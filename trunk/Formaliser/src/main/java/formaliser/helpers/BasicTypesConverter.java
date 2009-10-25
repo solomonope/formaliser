@@ -1,4 +1,4 @@
-package com.formaliser.helpers;
+package formaliser.helpers;
 
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.math.NumberUtils.isDigits;
@@ -16,6 +16,10 @@ public class BasicTypesConverter {
     public boolean canConvert(Class<?> classToConvert) {
         return CONVERTIBLE_CLASSES.isConvertible(classToConvert);
     }
+    
+    public boolean isBoolean(Class<?> classToCheck) {
+        return BOOLEAN_CONVERTER.canConvert(classToCheck);
+    }
 
     public Object convert(String value, Class<?> toClass) {
         if (String.class == toClass) return "".equals(value) ? null : value;
@@ -23,13 +27,14 @@ public class BasicTypesConverter {
         
         if (CONVERTIBLE_CLASSES.isNumber(toClass) && isNotValidNumber(value)) return null;
         
+        if (isBoolean(toClass)) return BOOLEAN_CONVERTER.convert(value);
+        
         if (byte.class == toClass || Byte.class == toClass) return Byte.valueOf(value);
         if (short.class == toClass || Short.class == toClass) return Short.valueOf(value);
         if (int.class == toClass || Integer.class == toClass) return Integer.valueOf(value);
         if (long.class == toClass || Long.class == toClass) return Long.valueOf(value);
         if (float.class == toClass || Float.class == toClass) return Float.valueOf(value);
         if (double.class == toClass || Double.class == toClass) return Double.valueOf(value);
-        if (boolean.class == toClass || Boolean.class == toClass) return Boolean.valueOf(value);
         
         throw new RuntimeException(BasicTypesConverter.class.getSimpleName() + " cannot convert " + toClass.getName());
     }

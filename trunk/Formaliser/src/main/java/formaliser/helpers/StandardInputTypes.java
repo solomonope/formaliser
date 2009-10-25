@@ -1,8 +1,8 @@
-package com.formaliser.helpers;
+package formaliser.helpers;
 
 import java.lang.reflect.Field;
 
-import com.formaliser.data.InputType;
+import formaliser.data.InputType;
 
 public enum StandardInputTypes implements InputType {
 	TEXT, CHECKBOX, SELECT, HIDDEN, OPTION, CHOICE;
