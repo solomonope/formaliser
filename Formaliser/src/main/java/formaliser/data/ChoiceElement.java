@@ -1,11 +1,13 @@
-package com.formaliser.data;
+package formaliser.data;
 
 import java.util.Arrays;
 
-import com.formaliser.helpers.StandardInputTypes;
+import formaliser.helpers.StandardInputTypes;
 
 public class ChoiceElement implements FormElement {
 
+    private static final String[] CHECKBOX_CHOICES = new String[] {"true"};
+    
     public final FieldName name;
     public final String value;
     public final String[] choices;
@@ -14,8 +16,15 @@ public class ChoiceElement implements FormElement {
     public ChoiceElement(FieldName name, String value, String[] choices, boolean required) {
         this.name = name;
         this.value = value;
-        this.choices = choices;
         this.required = required;
+        this.choices = choices;
+    }
+    
+    public ChoiceElement(FieldName name, String value, boolean required) {
+        this.name = name;
+        this.value = value;
+        this.required = required;
+        this.choices = CHECKBOX_CHOICES;
     }
     
     public boolean isSelected(String choice) {
@@ -24,7 +33,7 @@ public class ChoiceElement implements FormElement {
 
     @Override
     public InputType getType() {
-        if (Arrays.equals(choices, new String[] {"true"})) return StandardInputTypes.CHECKBOX;
+        if (Arrays.equals(choices, CHECKBOX_CHOICES)) return StandardInputTypes.CHECKBOX;
         return StandardInputTypes.CHOICE;
     }
 

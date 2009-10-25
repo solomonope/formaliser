@@ -1,4 +1,4 @@
-package com.formaliser.data;
+package formaliser.data;
 
 public class SimpleFormElement implements FormElement {
     public final FieldName field;
