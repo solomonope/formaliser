@@ -1,5 +1,6 @@
-package com.formaliser.forms;
+package formaliser.forms;
 
+import static java.lang.Boolean.FALSE;
 import static org.apache.commons.lang.StringUtils.*;
 
 import java.lang.reflect.Field;
@@ -7,17 +8,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.formaliser.configuration.FieldAnalyzer;
-import com.formaliser.configuration.HandlesJpaRelationships;
-import com.formaliser.configuration.InclusionMode;
-import com.formaliser.data.ChoiceElement;
-import com.formaliser.data.FieldName;
-import com.formaliser.data.FormElement;
-import com.formaliser.data.SimpleFormElement;
-import com.formaliser.helpers.BasicTypesConverter;
-import com.formaliser.helpers.BooleanConverter;
-import com.formaliser.helpers.JpaFieldAnalyzer;
-import com.formaliser.helpers.ManualBeanFieldAnalyzer;
+import formaliser.configuration.FieldAnalyzer;
+import formaliser.configuration.HandlesJpaRelationships;
+import formaliser.configuration.InclusionMode;
+import formaliser.data.ChoiceElement;
+import formaliser.data.FieldName;
+import formaliser.data.FormElement;
+import formaliser.data.SimpleFormElement;
+import formaliser.helpers.BasicTypesConverter;
+import formaliser.helpers.BooleanConverter;
+import formaliser.helpers.JpaFieldAnalyzer;
+import formaliser.helpers.ManualBeanFieldAnalyzer;
+import formaliser.helpers.StandardInputTypes;
 
 public class FormWriter {
     
@@ -54,6 +56,7 @@ public class FormWriter {
     private List<FormElement> toForm(final String prefix, Class<?> entityClass, Object root) {
         try {
             ArrayList<FormElement> form = new ArrayList<FormElement>();
+            
             for (ExtendedField extendedField : getFields(entityClass, root)) {
                 final Field field = extendedField.field;
                 field.setAccessible(true);
@@ -77,6 +80,28 @@ public class FormWriter {
         } catch (Exception e) {
             throw new RuntimeException(e); 
         }
+    }
+
+    public FormElement toFormElement(String prefix, Object value) {
+        Class<?> valueClass;
+        String convertedValue = "";
+        
+        if (value.getClass() == Class.class) {
+            valueClass = (Class<?>) value;
+        } else {
+            valueClass = value.getClass();
+            convertedValue = typesConverter.convert(value);
+        }
+        
+        if (!typesConverter.canConvert(valueClass)) throw new RuntimeException("Use the toForm() methods to convert " + valueClass);
+        
+        FormElement formElement;
+        if (booleanConverter.canConvert(valueClass)) {
+            formElement = new ChoiceElement(new FieldName(prefix), convertedValue, new String[] {"true"}, true);
+        } else {
+            formElement = new SimpleFormElement(new FieldName(prefix), StandardInputTypes.TEXT, convertedValue, false);
+        }
+        return formElement;
     }
 
     private ChoiceElement convertEnum(final String prefix, Object root, ExtendedField extendedField) throws Exception {
@@ -108,7 +133,7 @@ public class FormWriter {
     }
 
     private String convertValue(Field field, Object root) throws IllegalAccessException {
-        if ((root == null || field.get(root) == null) && booleanConverter.canConvert(field.getType())) return booleanConverter.convert((Boolean) null);
+        if ((root == null || field.get(root) == null) && typesConverter.isBoolean(field.getType())) return typesConverter.convert(FALSE);
         if (root == null) return EMPTY;
         return typesConverter.convert(field.get(root));
     }
