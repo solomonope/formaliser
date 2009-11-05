@@ -8,13 +8,12 @@ import java.util.Date;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
-import formaliser.helpers.DateConverter;
-
 public class DateConverterTest {
 
+    private DateConverter converter = new DateConverter();
+    
     @Test
     public void converts_date_and_time() {
-        DateConverter converter = new DateConverter();
         
         Date date = converter.convert("19/03/2008 15:32");
         
@@ -23,5 +22,16 @@ public class DateConverterTest {
         expectedCal = DateUtils.truncate(expectedCal, Calendar.MINUTE);
         
         assertThat(date).isEqualTo(expectedCal.getTime());
+    }
+    
+    @Test
+    public void converts_sql_date() {
+        long now = System.currentTimeMillis();
+        
+        assertThat(converter.canConvert(java.sql.Date.class)).isTrue();
+        
+        String expected = converter.convert(new java.sql.Date(now));
+        
+        assertThat(expected).isEqualTo(converter.convert(new Date(now)));
     }
 }
