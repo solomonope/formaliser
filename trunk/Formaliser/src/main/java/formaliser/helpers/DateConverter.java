@@ -8,7 +8,7 @@ import java.util.Locale;
 public class DateConverter {
 
     public boolean canConvert(Class<?> classToConvert) {
-        return Date.class.equals(classToConvert);
+        return Date.class.isAssignableFrom(classToConvert);
     }
 
     public Date convert(String value) {
