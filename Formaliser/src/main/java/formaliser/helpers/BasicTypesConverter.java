@@ -3,6 +3,9 @@ package formaliser.helpers;
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.math.NumberUtils.isDigits;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Date;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -24,17 +27,32 @@ public class BasicTypesConverter {
     public Object convert(String value, Class<?> toClass) {
         if (String.class == toClass) return "".equals(value) ? null : value;
         if (DATE_CONVERTER.canConvert(toClass)) return DATE_CONVERTER.convert(value);
-        
         if (CONVERTIBLE_CLASSES.isNumber(toClass) && isNotValidNumber(value)) return null;
         
-        if (isBoolean(toClass)) return BOOLEAN_CONVERTER.convert(value);
+        try {
+            for (Method method : toClass.getMethods()) {
+                if (Modifier.isStatic(method.getModifiers()) && method.getName().equals("valueOf") && method.getParameterTypes().length == 1 && method.getParameterTypes()[0] == String.class) {
+                    return method.invoke(null, value);
+                }
+            }
+
+            for (Constructor<?> constructor : toClass.getConstructors()) {
+                if (constructor.getParameterTypes().length == 1 && constructor.getParameterTypes()[0] == String.class) {
+                    return constructor.newInstance(value);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         
-        if (byte.class == toClass || Byte.class == toClass) return Byte.valueOf(value);
-        if (short.class == toClass || Short.class == toClass) return Short.valueOf(value);
-        if (int.class == toClass || Integer.class == toClass) return Integer.valueOf(value);
-        if (long.class == toClass || Long.class == toClass) return Long.valueOf(value);
-        if (float.class == toClass || Float.class == toClass) return Float.valueOf(value);
-        if (double.class == toClass || Double.class == toClass) return Double.valueOf(value);
+        
+        if (boolean.class == toClass) return Boolean.valueOf(value);
+        if (byte.class == toClass) return Byte.valueOf(value);
+        if (short.class == toClass) return Short.valueOf(value);
+        if (int.class == toClass) return Integer.valueOf(value);
+        if (long.class == toClass) return Long.valueOf(value);
+        if (float.class == toClass) return Float.valueOf(value);
+        if (double.class == toClass) return Double.valueOf(value);
         
         throw new RuntimeException(BasicTypesConverter.class.getSimpleName() + " cannot convert " + toClass.getName());
     }
