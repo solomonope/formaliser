@@ -19,7 +19,7 @@ public interface HtmlTemplates {
      * Used to decorate the result of the transformation to HTML.
      * The template can use ${formElement}
      * Example: put the form element in a list or a table row. 
-     * @return a template, or null if none is used.
+     * @return a template, or an empty String if none is used.
      */
     String getLineDecorator();
     

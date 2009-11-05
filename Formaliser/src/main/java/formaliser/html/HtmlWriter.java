@@ -1,6 +1,6 @@
 package formaliser.html;
 
-import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang.StringUtils.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +64,7 @@ public class HtmlWriter {
         }
         
         String formElementHtml = labelText + inputText;
-        if (htmlTemplates.getLineDecorator() != null) {
+        if (isNotEmpty(htmlTemplates.getLineDecorator())) {
             templateValues.put("formElement", formElementHtml);
             formElementHtml = strSubstitutor.replace(htmlTemplates.getLineDecorator());
         }
