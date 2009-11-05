@@ -3,6 +3,7 @@ package formaliser.toentitytests;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.reflect.core.Reflection.field;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,7 +12,6 @@ import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
-
 
 import formaliser.forms.FormReader;
 import formaliser.testutils.TestClasses.BasicTypesEntity;
@@ -299,6 +299,18 @@ public class RequestParametersConversionTest {
         WithPrivateFields entity = converter.readClass("WithPrivateFields", WithPrivateFields.class, parameters, 0);
         
         assertThat(field("name").ofType(String.class).in(entity).get()).isEqualTo("a name");
+    }
+    
+    @Test
+    public void returns_null_for_invalid_number() {
+        addParameter("invalidBigDecimal", "aa");
+        addParameter("invalidLong", "bb");
+        
+        BigDecimal invalidBigDecimal = converter.readParameter("invalidBigDecimal", BigDecimal.class, parameters, 0);
+        Long invalidLong = converter.readParameter("invalidLong", Long.class, parameters, 0);
+        
+        assertThat(invalidBigDecimal).isNull();
+        assertThat((Object) invalidLong).isNull();
     }
     
     public static class CollectionHolder {
