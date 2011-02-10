@@ -1,4 +1,4 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

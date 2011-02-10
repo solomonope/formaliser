@@ -7,11 +7,12 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import formaliser.data.ChoiceElement;
-import formaliser.data.FieldName;
-import formaliser.helpers.StandardInputTypes;
-import formaliser.html.HtmlWriter;
-import formaliser.html.PlainHtmlTemplates;
+import com.moandjiezana.formaliser.data.ChoiceElement;
+import com.moandjiezana.formaliser.data.FieldName;
+import com.moandjiezana.formaliser.helpers.StandardInputTypes;
+import com.moandjiezana.formaliser.html.HtmlWriter;
+import com.moandjiezana.formaliser.html.PlainHtmlTemplates;
+
 
 public class HtmlWriterTest {
     private HtmlWriter writer = new HtmlWriter();

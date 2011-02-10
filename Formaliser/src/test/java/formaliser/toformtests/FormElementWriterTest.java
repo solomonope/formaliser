@@ -5,9 +5,10 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Test;
 
+import com.moandjiezana.formaliser.data.FormElement;
+import com.moandjiezana.formaliser.forms.FormWriter;
 
-import formaliser.data.FormElement;
-import formaliser.forms.FormWriter;
+
 import formaliser.testutils.TestClasses.BasicTypesEntity;
 
 public class FormElementWriterTest {

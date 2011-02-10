@@ -1,4 +1,4 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package formaliser.html;
+package com.moandjiezana.formaliser.html;
 
 import org.apache.commons.lang.text.StrSubstitutor;
 

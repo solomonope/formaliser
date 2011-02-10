@@ -1,4 +1,4 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.math.NumberUtils.isDigits;

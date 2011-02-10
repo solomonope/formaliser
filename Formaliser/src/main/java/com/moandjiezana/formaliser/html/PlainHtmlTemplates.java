@@ -1,4 +1,4 @@
-package formaliser.html;
+package com.moandjiezana.formaliser.html;
 
 public class PlainHtmlTemplates implements HtmlTemplates {
 

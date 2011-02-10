@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.moandjiezana.formaliser.helpers.DateConverter;
+
 public class DateConverterTest {
 
     private DateConverter converter = new DateConverter();

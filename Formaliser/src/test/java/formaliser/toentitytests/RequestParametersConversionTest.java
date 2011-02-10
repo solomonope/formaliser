@@ -13,7 +13,8 @@ import java.util.Locale;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import formaliser.forms.FormReader;
+import com.moandjiezana.formaliser.forms.FormReader;
+
 import formaliser.testutils.TestClasses.BasicTypesEntity;
 import formaliser.testutils.TestClasses.CompositeGraphRoot;
 import formaliser.testutils.TestClasses.GraphRoot;
