@@ -1,4 +1,4 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import static java.lang.Boolean.FALSE;
 

@@ -1,4 +1,4 @@
-package formaliser.data;
+package com.moandjiezana.formaliser.data;
 
 public interface FormElement {
 

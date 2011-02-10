@@ -1,9 +1,10 @@
-package formaliser.configuration;
+package com.moandjiezana.formaliser.configuration;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import formaliser.data.InputType;
+import com.moandjiezana.formaliser.data.InputType;
+
 
 public interface FieldAnalyzer {
 

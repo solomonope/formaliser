@@ -1,6 +1,6 @@
 package formaliser.toformtests;
 
-import static formaliser.helpers.StandardInputTypes.*;
+import static com.moandjiezana.formaliser.helpers.StandardInputTypes.*;
 import static formaliser.testutils.TestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -9,9 +9,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.moandjiezana.formaliser.data.FormElement;
+import com.moandjiezana.formaliser.forms.FormWriter;
 
-import formaliser.data.FormElement;
-import formaliser.forms.FormWriter;
+
 import formaliser.testutils.TestClasses;
 import formaliser.testutils.TestClasses.AnEmbeddable;
 import formaliser.testutils.TestClasses.NonInsertableEntity;

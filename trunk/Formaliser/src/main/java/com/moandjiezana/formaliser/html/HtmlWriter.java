@@ -1,4 +1,4 @@
-package formaliser.html;
+package com.moandjiezana.formaliser.html;
 
 import static org.apache.commons.lang.StringUtils.*;
 
@@ -8,9 +8,10 @@ import java.util.List;
 import org.apache.commons.lang.text.StrBuilder;
 import org.apache.commons.lang.text.StrSubstitutor;
 
-import formaliser.data.ChoiceElement;
-import formaliser.data.FormElement;
-import formaliser.helpers.StandardInputTypes;
+import com.moandjiezana.formaliser.data.ChoiceElement;
+import com.moandjiezana.formaliser.data.FormElement;
+import com.moandjiezana.formaliser.helpers.StandardInputTypes;
+
 
 public class HtmlWriter {
     

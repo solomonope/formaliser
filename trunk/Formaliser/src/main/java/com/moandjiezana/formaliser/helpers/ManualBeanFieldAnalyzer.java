@@ -1,4 +1,4 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -11,10 +11,11 @@ import java.util.Set;
 
 import org.apache.commons.lang.ClassUtils;
 
+import com.moandjiezana.formaliser.configuration.FieldAnalyzer;
+import com.moandjiezana.formaliser.configuration.InclusionMode;
+import com.moandjiezana.formaliser.data.InputType;
 
-import formaliser.configuration.FieldAnalyzer;
-import formaliser.configuration.InclusionMode;
-import formaliser.data.InputType;
+
 
 public class ManualBeanFieldAnalyzer implements FieldAnalyzer {
     

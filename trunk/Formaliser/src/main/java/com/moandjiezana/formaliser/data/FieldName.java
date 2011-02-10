@@ -1,4 +1,4 @@
-package formaliser.data;
+package com.moandjiezana.formaliser.data;
 
 import static org.apache.commons.lang.StringUtils.*;
 import static org.apache.commons.lang.WordUtils.capitalize;

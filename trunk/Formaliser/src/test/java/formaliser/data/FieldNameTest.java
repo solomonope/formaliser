@@ -5,7 +5,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import formaliser.data.FieldName;
+import com.moandjiezana.formaliser.data.FieldName;
+
 
 public class FieldNameTest {
 

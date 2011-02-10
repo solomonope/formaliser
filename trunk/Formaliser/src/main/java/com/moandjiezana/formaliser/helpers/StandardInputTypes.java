@@ -1,8 +1,9 @@
-package formaliser.helpers;
+package com.moandjiezana.formaliser.helpers;
 
 import java.lang.reflect.Field;
 
-import formaliser.data.InputType;
+import com.moandjiezana.formaliser.data.InputType;
+
 
 public enum StandardInputTypes implements InputType {
 	TEXT, CHECKBOX, SELECT, HIDDEN, OPTION, CHOICE;

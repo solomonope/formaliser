@@ -1,4 +1,4 @@
-package formaliser.forms;
+package com.moandjiezana.formaliser.forms;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -13,8 +13,9 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
-import formaliser.helpers.BasicConvertibleClasses;
-import formaliser.helpers.BasicTypesConverter;
+import com.moandjiezana.formaliser.helpers.BasicConvertibleClasses;
+import com.moandjiezana.formaliser.helpers.BasicTypesConverter;
+
 
 /**
  * All reading methods can return null, leaving validation to another class.

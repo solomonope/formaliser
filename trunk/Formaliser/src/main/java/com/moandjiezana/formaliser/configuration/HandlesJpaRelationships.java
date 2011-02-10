@@ -1,9 +1,10 @@
-package formaliser.configuration;
+package com.moandjiezana.formaliser.configuration;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-import formaliser.forms.FormWriter.ExtendedField;
+import com.moandjiezana.formaliser.forms.FormWriter.ExtendedField;
+
 
 public interface HandlesJpaRelationships {
 

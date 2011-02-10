@@ -1,8 +1,9 @@
-package formaliser.data;
+package com.moandjiezana.formaliser.data;
 
 import java.util.Arrays;
 
-import formaliser.helpers.StandardInputTypes;
+import com.moandjiezana.formaliser.helpers.StandardInputTypes;
+
 
 public class ChoiceElement implements FormElement {
 

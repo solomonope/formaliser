@@ -1,10 +1,10 @@
 package formaliser.testutils;
 
 
-import formaliser.data.ChoiceElement;
-import formaliser.data.FieldName;
-import formaliser.data.SimpleFormElement;
-import formaliser.helpers.StandardInputTypes;
+import com.moandjiezana.formaliser.data.ChoiceElement;
+import com.moandjiezana.formaliser.data.FieldName;
+import com.moandjiezana.formaliser.data.SimpleFormElement;
+import com.moandjiezana.formaliser.helpers.StandardInputTypes;
 
 public class TestUtils {
 

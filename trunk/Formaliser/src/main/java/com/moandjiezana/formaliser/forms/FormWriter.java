@@ -1,4 +1,4 @@
-package formaliser.forms;
+package com.moandjiezana.formaliser.forms;
 
 import static java.lang.Boolean.FALSE;
 import static org.apache.commons.lang.StringUtils.*;
@@ -8,18 +8,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import formaliser.configuration.FieldAnalyzer;
-import formaliser.configuration.HandlesJpaRelationships;
-import formaliser.configuration.InclusionMode;
-import formaliser.data.ChoiceElement;
-import formaliser.data.FieldName;
-import formaliser.data.FormElement;
-import formaliser.data.SimpleFormElement;
-import formaliser.helpers.BasicTypesConverter;
-import formaliser.helpers.BooleanConverter;
-import formaliser.helpers.JpaFieldAnalyzer;
-import formaliser.helpers.ManualBeanFieldAnalyzer;
-import formaliser.helpers.StandardInputTypes;
+import com.moandjiezana.formaliser.configuration.FieldAnalyzer;
+import com.moandjiezana.formaliser.configuration.HandlesJpaRelationships;
+import com.moandjiezana.formaliser.configuration.InclusionMode;
+import com.moandjiezana.formaliser.data.ChoiceElement;
+import com.moandjiezana.formaliser.data.FieldName;
+import com.moandjiezana.formaliser.data.FormElement;
+import com.moandjiezana.formaliser.data.SimpleFormElement;
+import com.moandjiezana.formaliser.helpers.BasicTypesConverter;
+import com.moandjiezana.formaliser.helpers.BooleanConverter;
+import com.moandjiezana.formaliser.helpers.JpaFieldAnalyzer;
+import com.moandjiezana.formaliser.helpers.ManualBeanFieldAnalyzer;
+import com.moandjiezana.formaliser.helpers.StandardInputTypes;
+
 
 public class FormWriter {
     
